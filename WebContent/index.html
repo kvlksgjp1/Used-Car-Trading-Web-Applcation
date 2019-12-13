@@ -14,6 +14,12 @@
 	</head>
 	<body class="is-preload">
 
+							<script>
+
+						    localStorage.setItem('login_status', 'failed');
+						    localStorage.setItem('login_id', 'null');
+							</script>
+							
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -24,9 +30,38 @@
 						</div>
 						<div class="content">
 							<div class="inner">
-								<h1>TEAM 7</h1>
+							
+								<h1>TEAM 3</h1>
 								<p>DataBase Phase 4<br>
 								Web DataBase Application Project<br>HIGHLY INTERACTIVE WEB PAGE</p>
+								
+							<script>
+							function getParameterByName(name) {
+							    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+							    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+							        results = regex.exec(location.search);
+							    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+							}
+							
+							    var login_status = getParameterByName('login_status');
+							    //document.write(login_status);
+							    if(login_status == "success")
+							    {
+								    var login_id = getParameterByName('login_id');
+								    //document.write(login_id);
+								    localStorage.setItem('login_status', 'success');
+								    localStorage.setItem('login_id', login_id);
+								    
+								    document.write(login_id+"님 환영합니다"); 
+							    }
+							    else if(login_status == "failed")
+							    {
+								    //document.write(login_id);
+								    localStorage.setItem('login_status', 'failed');
+								    
+							    }
+							</script>
+							
 							</div>
 						</div>
 						<nav>
