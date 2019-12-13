@@ -17,7 +17,7 @@
 	</head>
 	<body>
 	<br><br><br>
-	<h2 align="center">A List of Vehicle</h2>	
+	<h2 align="center">Total Sell Of Year</h2>	
 	<br><br>
 	<%
 	String ip = "localhost";
@@ -32,10 +32,12 @@
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url,user,pass);
-	String sql;
-	sql="select vehicle_id,vehicle_did,price,mileage,price,model_year\r\n" + 
-			"from vehicle natural join\r\n" + 
-			"(select vehicle_id from vehicle minus select distinct order_vid as vehicle_id from order_) where is_opened = 1";
+
+	String year=request.getParameter("year");
+	
+    String sql = "select sum(price)\r\n" + 
+            "from order_ JOIN vehicle on order_vid=vehicle_id\r\n" + 
+            "WHERE ODATE LIKE '"+year+"/__/__'";
 	System.out.println(sql);
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
@@ -51,12 +53,6 @@
 	while(rs.next()){
 		out.println("<tr>");
 		out.println("<td>"+rs.getString(1)+"</td>");
-		out.println("<td>"+rs.getString(2)+"</td>");
-		out.println("<td>"+rs.getString(3)+"</td>");
-		out.println("<td>"+rs.getString(4)+"</td>");
-		out.println("<td>"+rs.getString(5)+"</td>");
-		String str = rs.getString(6);
-		out.println("<td>"+str.split(" ")[0]+"</td>");
 		out.println("</tr>");
 	}
 	out.println("</table>");

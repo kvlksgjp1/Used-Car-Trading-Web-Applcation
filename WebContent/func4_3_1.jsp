@@ -17,7 +17,7 @@
 	</head>
 	<body>
 	<br><br><br>
-	<h2 align="center">A List of Vehicle</h2>	
+	
 	<br><br>
 	<%
 	String ip = "localhost";
@@ -32,36 +32,24 @@
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url,user,pass);
-	String sql;
-	sql="select vehicle_id,vehicle_did,price,mileage,price,model_year\r\n" + 
-			"from vehicle natural join\r\n" + 
-			"(select vehicle_id from vehicle minus select distinct order_vid as vehicle_id from order_) where is_opened = 1";
+
+	String year=request.getParameter("year");
+
+	String sql = "update vehicle set is_opened=1 where vehicle_id="+request.getParameter("vehicle_number");
 	System.out.println(sql);
-	pstmt = conn.prepareStatement(sql);
-	rs = pstmt.executeQuery();
+	Statement stmt = conn.createStatement();
+	int res = stmt.executeUpdate(sql);
 	
-	out.println("<table border = \"1\">");
-	ResultSetMetaData rsmd = rs.getMetaData();
-	int cnt = rsmd.getColumnCount();
-	for(int i =1;i<=cnt;i++){
-		out.println("<th>"+rsmd.getColumnName(i)+"</th>");
-		
-		
-	}
-	while(rs.next()){
-		out.println("<tr>");
-		out.println("<td>"+rs.getString(1)+"</td>");
-		out.println("<td>"+rs.getString(2)+"</td>");
-		out.println("<td>"+rs.getString(3)+"</td>");
-		out.println("<td>"+rs.getString(4)+"</td>");
-		out.println("<td>"+rs.getString(5)+"</td>");
-		String str = rs.getString(6);
-		out.println("<td>"+str.split(" ")[0]+"</td>");
-		out.println("</tr>");
-	}
-	out.println("</table>");
+	if(res==1)
+		out.write("<h2 align='center'>"+request.getParameter("vehicle_number")+"차량 공개 처리 완료</h2>");
+
+	out.write("<form align='center' method='post' action='index.html'>");
+	out.write("<input align='right' type='submit' value='돌아가기'>");
+	out.write(" </form>");
 	%>	
 	
 	
 	</body>
 </html>
+
+

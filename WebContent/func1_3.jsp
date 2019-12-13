@@ -4,11 +4,11 @@
 <%@ page language="java" import="java.text.*, java.sql.*" %>
 
 <%
-	String serverIP = "localhost";
-	String strSID = "xe";
-	String portNum = "1600";
-	String user = "team_project";
-	String pass = "team";
+	String serverIP = "155.230.36.61";
+	String strSID = "orcl";
+	String portNum = "1521";
+	String user = "s2015110986";
+	String pass = "hsb2537";
 	String url = "jdbc:oracle:thin:@"+serverIP+":"+portNum+":"+strSID;
 	
 	Connection conn = null;
@@ -20,23 +20,33 @@
 	conn = DriverManager.getConnection(url, user, pass);
 	stmt = conn.createStatement();
 	
-	String query = "SELECT Authorization "+
-			"FROM ACCOUNT "+
-			"WHERE Account_ID='"+request.getParameter("id")+"' AND Password='"+request.getParameter("pw")+"'";
-
+	String query ="update account set password="+"'"+request.getParameter("newpassword")+"'"+ "where account_id ="+"'"+request.getParameter("id")+"'";
+	
 	System.out.println(query);
 	pstmt = conn.prepareStatement(query);
-	rs = pstmt.executeQuery();
+	try{
+		rs = pstmt.executeQuery();
+		String redirectUrl = "index.html?"+"change_status=success"; //
+		response.sendRedirect(redirectUrl);
+	}catch(Exception e)
+	{
+		String redirectUrl = "index.html?"+"change_status=failed"; // 인증 실패
+
+		//session.setAttribute("phase4_login_status", "failed");
+		response.sendRedirect(redirectUrl);
+	}
 	
-	ResultSetMetaData rsmd = rs.getMetaData();
+	//ResultSetMetaData rsmd = rs.getMetaData();
 	//int cnt = rsmd.getColumnCount();
 	//System.out.println(cnt);
 	String result="none";
 	
+	/*
 	while(rs.next()){
 		result = rs.getString(1);
 	}
-	
+	*/
+	/*
 	if (!result.equals("none"))
 	{
 		String redirectUrl = "index.html?"+"login_status=success&login_id="+request.getParameter("id")+"&authorization="+result; // 인증 성공
@@ -53,6 +63,7 @@
 		//session.setAttribute("phase4_login_status", "failed");
 		response.sendRedirect(redirectUrl);
 	}
+	*/
 	
 %>
 

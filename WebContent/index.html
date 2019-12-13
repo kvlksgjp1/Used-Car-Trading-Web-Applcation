@@ -44,6 +44,22 @@
 							<script>
 							//document.write(localStorage.getItem("login_status"));
 							
+							var out_status = getParameterByName('out_status');
+							    
+							    //document.write(login_status);
+							    if(out_status == "refused")
+							    {
+									document.write("(매니저가 한명이므로 탈퇴할 수 없습니다)\n");
+									status=null;
+							    }
+							    else if(out_status == "success")
+							    {
+									islogout = null;
+									document.write("탈퇴가 완료되었습니다 (자동 로그아웃)");
+								    sessionStorage.setItem('login_status', 'logout');
+								    sessionStorage.setItem('login_id', 'none');
+								    sessionStorage.setItem('authorization', 'none');
+							    }
 							
 							    var login_status = getParameterByName('login_status');
 							    //document.write(login_status);
@@ -82,8 +98,23 @@
 							    if(sessionStorage.getItem("login_status") == "success")
 							    	{
 							    	var login_id2=sessionStorage.getItem("login_id")
-							    	document.write(login_id2+"님 환영합니다"); 
+							    	document.write(login_id2+"님 환영합니다<br>"); 
 							    	}
+							    
+
+							    var register_status = getParameterByName('register_status');
+							    
+							    if(register_status == "success")
+							    {
+							    	document.write("회원가입 완료");
+							    }
+							    else if(register_status == "failed")
+							    {
+								    document.write("이미 있는 아이디입니다");
+							    }
+							    
+							    
+							    
 							</script>
 							
 							</div>
@@ -127,7 +158,7 @@
 							
 						<nav>
 							<ul>
-								<li><a href="#F2_1">차량 매물 전체검색</a></li>
+								<li><a href="func2_1.jsp">차량 매물 전체검색</a></li>
 								<li><a href="#F2_2">제조사별 차량 검색</a></li>
 								<li><a href="#F2_3">특정 조건으로 차량 검색</a></li>
 								<li><a href="#F2_4">이름으로 검색</a></li>
@@ -177,28 +208,282 @@
 							<!-- F1_1 -->
 							<article id="F1_1">
 								<h2 class="major">회원가입</h2>
-								
-								테스트
+								<nav>
+									<ul>
+										<li><a href="#basicregister">기본정보 입력</a></li>
+										<li><a href="#addregister">추가적정보(성,생년월일) 포함 입력</a></li>
+										<li><a href="#allregister">모든정보 입력</a></li>
+										<!--<li><a href="#elements">Elements</a></li>-->
+									</ul>
+								</nav>
 							</article>
-							
+
+							<article id="basicregister">
+								<h2 class="major">회원가입</h2>
+								
+								<form method="post" action="func1_1a.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="password">비밀번호</label>
+											<input type="text" name="password" id="password" />
+										</div>
+										<div class="field">
+											<label for="name">이름</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field">
+											<label for="phonenumber">핸드폰번호</label>
+											<input type="text" name="phonenumber" id="phonenumber" />
+										</div>
+										</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+							<article id="addregister">
+								<h2 class="major">회원가입</h2>
+								<form method="post" action="func1_1b.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="password">비밀번호</label>
+											<input type="text" name="password" id="password" />
+										</div>
+										<div class="field">
+											<label for="name">이름</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field">
+											<label for="phonenumber">핸드폰번호</label>
+											<input type="text" name="phonenumber" id="phonenumber" />
+										</div>
+										<div class="field">
+											<label for="Sex">성</label>
+											<input type="text" name="sex" id="sex" />
+										</div>
+										<div class="field">
+											<label for="birthdate">생년월일(yyyy-mm-dd)</label>
+											<input type="text" name="birthdate" id="birthdate" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+
+						<!-- Contact -->
+							<article id="allregister">
+								<h2 class="major">회원가입</h2>
+								<form method="post" action="func1_1c.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="password">비밀번호</label>
+											<input type="text" name="password" id="password" />
+										</div>
+										<div class="field">
+											<label for="name">이름</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field">
+											<label for="phonenumber">핸드폰번호</label>
+											<input type="text" name="phonenumber" id="phonenumber" />
+										</div>
+										<div class="field">
+											<label for="Sex">성</label>
+											<input type="text" name="sex" id="sex" />
+										</div>
+										<div class="field">
+											<label for="birthdate">생년월일(yyyy-mm-dd)</label>
+											<input type="text" name="birthdate" id="birthdate" />
+										</div>
+										<div class="field">
+											<label for="address">주소</label>
+											<input type="text" name="address" id="address" />
+										</div>
+										<div class="field">
+											<label for="profession">직업</label>
+											<input type="text" name="profession" id="profession" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
 							<!-- F1_2 -->
 							<article id="F1_2">
 								<h2 class="major">회원 정보 수정</h2>
-								
+
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
 									{
 									document.write('먼저 로그인 하세요');
 									}
+								else
+									{
+
+									document.write('	<nav>');
+									document.write('	<ul>');
+										document.write('<li><a href="#changename">이름 변경</a></li>');
+										document.write('<li><a href="#changesex">성 변경</a></li>');
+										document.write('<li><a href="#changebirth">생년월일 변경</a></li>');
+										document.write('<li><a href="#changephonenum">휴대폰번호 변경</a></li>');
+										document.write('<li><a href="#changeaddress">주소 변경</a></li>');
+											document.write('<li><a href="#changeprofession">직업 변경</a></li>');
+											<!--<li><a href="#elements">Elements</a></li>-->
+											document.write('	</ul>');
+											document.write('	</nav>	');
+									
+									}
 								</script>
-								
+					
 							</article>
-							
+
+							<article id="changename">
+								<h2 class="major">새로운 이름 입력</h2>
+								<form method="post" action="func1_2.jsp">
+								 	<div class="fields">
+								 		<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="newname">이름</label>
+											<input type="text" name="newname" id="newname" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+							<article id="changesex">
+								<h2 class="major">새로운 성 입력</h2>
+								<form method="post" action="func1_2.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="newsex">성</label>
+											<input type="text" name="newsex" id="newsex" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+							<article id="changebirth">
+								<h2 class="major">새로운 생년월일 입력</h2>
+								<form method="post" action="func1_2.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="birthdate">생년월일</label>
+											<input type="text" name="newbirthdate" id="newbirthdate" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+
+							<article id="changephonenum">
+								<h2 class="major">새로운 휴대폰번호 입력</h2>
+								<form method="post" action="func1_2.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="phonenum">휴대폰번호</label>
+											<input type="text" name="newphonenumber" id="newphonenumber" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+							<article id="changeaddress">
+								<h2 class="major">새로운 주소 입력</h2>
+								<form method="post" action="func1_2.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="address">주소</label>
+											<input type="text" name="newaddress" id="newaddress" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
+							<article id="changeprofession">
+								<h2 class="major">새로운 직업 입력</h2>
+								<form method="post" action="func1_2.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="address">직업</label>
+											<input type="text" name="newprofession" id="newprofession" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+
 							<!-- F1_3 -->
 							<article id="F1_3">
 								<h2 class="major">비밀 번호 수정</h2>
-								
+
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
@@ -206,13 +491,28 @@
 									document.write('먼저 로그인 하세요');
 									}
 								</script>
-								
+								<form method="post" action="func1_3.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="id">아이디</label>
+											<input type="text" name="id" id="id" />
+										</div>
+										<div class="field">
+											<label for="address">새 비밀번호</label>
+											<input type="text" name="newpassword" id="newpassword" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
 							</article>
-							
+
 						<!-- F1_4 -->
 							<article id="F1_4">
 								<h2 class="major">로그인</h2>
-								
+
 								 <form action="authentication.jsp" method="post">
 					            <label>ID: </label>
 					            <input name="id" type="text"><br>
@@ -221,22 +521,42 @@
 					            <input type="submit" value="로그인">
 					        </form>
 							</article>
-							
-					
-					
+
+
+
 							<!-- F1_5 -->
 							<article id="F1_5">
 								<h2 class="major">회원 탈퇴 기능</h2>
-								
+
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
 									{
 									document.write('먼저 로그인 하세요');
 									}
+								
 								</script>
+
+								<form method="post" action="func1_5.jsp">
+									<div class="fields">
+										<div class="field">
+											<label for="address">아이디</label>
+											<input type="text" name="outid" id="outid" />
+										</div>
+										<div class="field">
+											<label for="address">비밀번호</label>
+											<input type="text" name="outpassword" id="outpassword" />
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Done" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+						
+									</ul>
+								</form>
 								
 							</article>
+
 							
 							
 							<!-- F1_6 -->
@@ -261,7 +581,7 @@
 							<!-- F2_1 -->
 							<article id="F2_1">
 								<h2 class="major">차량 매물 전체검색</h2>
-								
+								request.red
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
@@ -276,7 +596,10 @@
 							<!-- F2_2 -->
 							<article id="F2_2">
 								<h2 class="major">제조사별 차량 검색</h2>
-								
+								 <form method="post" action="func2_2.jsp">
+           						 	<input type="text" name="make_name">
+            						<input align="right" type="submit" value="검색">
+        						</form>
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
@@ -284,15 +607,28 @@
 									document.write('먼저 로그인 하세요');
 									}
 								</script>
-								
-								테스트
 							</article>
 							
 							
 							<!-- F2_3 -->
 							<article id="F2_3">
 								<h2 class="major">특정 조건으로 차량 검색</h2>
-								
+								<h3>찾고자 하는 항목을 기록하세요</h3>
+		                     <form action="func2_3.jsp">
+		                  	 차량id&nbsp;<input type="text" name="1"><br>
+		                  	 가격&nbsp;<input type="text" name="2"><br>
+					                   주행거리&nbsp;<input type="text" name="3"><br>
+					                   연식&nbsp;<input type="text" name="4"><br>
+					                   카테고리&nbsp;<input type="text" name="5"><br>
+					                   기어&nbsp;<input type="text" name="6"><br>
+					                   배기량&nbsp;<input type="text" name="7"><br>
+					                   회사명&nbsp;<input type="text" name="8"><br>
+					                   모델명&nbsp;<input type="text" name="9"><br>
+					                   세부모델명&nbsp;<input type="text" name="10"><br>
+					                   연료&nbsp;<input type="text" name="11"><br>
+					                   색상&nbsp;<input type="text" name="12"><br>
+		                     <input dir="rtl" type="submit" name="submit" value="검색하기">
+		                     </form>
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
@@ -300,15 +636,17 @@
 									document.write('먼저 로그인 하세요');
 									}
 								</script>
-								
-								테스트
 							</article>
 							
 							
 							<!-- F2_4 -->
 							<article id="F2_4">
 								<h2 class="major">이름으로 검색</h2>
-								
+								<h2 class="major">이름별 차량 검색</h2>
+								 <form method="post" action="func2_4.jsp">
+           						 	<input type="text" name="car_name">
+            						<input align="right" type="submit" value="검색">
+        						</form>
 								<script>
 								var is_login = sessionStorage.getItem('login_status');
 								if(!(is_login=="success"))
@@ -316,7 +654,6 @@
 									document.write('먼저 로그인 하세요');
 									}
 								</script>
-								테스트
 							</article>
 							
 							
@@ -331,8 +668,15 @@
 									{
 									document.write('먼저 회원으로 로그인 하세요');
 									}
+								else
+									{
+									document.write('<form method="post" action="func3_1.jsp?login_id='+sessionStorage.getItem('login_id')+'">');
+													document.write('<input align="right" type="submit" value="내역 확인">');
+															document.write('</form>');
+									
+									}
 								</script>
-								테스트
+								
 							</article>
 							
 							
@@ -346,8 +690,16 @@
 									{
 									document.write('먼저 매니저로 로그인 하세요');
 									}
+								else
+								{
+								document.write('<form method="post" action="func3_2.jsp?login_id='+sessionStorage.getItem('login_id')+'">');
+												document.write('<input align="right" type="submit" value="내역 확인">');
+														document.write('</form>');
+								
+								}
 								</script>
-								테스트
+								
+								
 							</article>
 							
 							
@@ -361,10 +713,52 @@
 									{
 									document.write('먼저 매니저로 로그인 하세요');
 									}
+								else
+									document.write('<nav>');
+								document.write('<ul>');
+								document.write('<li><a href="#F3_3_1">월별 매출액 확인</a></li>');
+								document.write('<li><a href="#F3_3_2">연도별 매출액 확인</a></li>');
+								document.write('<li><a href="#F3_3_3">제조사별 매출액 확인</a></li>');
+								document.write('</ul>');
+										document.write('</nav>');
 								</script>
-								테스트
+								
 							</article>
 							
+							<!-- F3_3_1 -->
+							<article id="F3_3_1">
+								<h2 class="major">월별 매출액 확인</h2>
+								몇 월의 매출액을 확인 하시겠습니까?
+								 <form method="post" action="func3_3_1.jsp">
+           						 	<input type="text" name="month">
+            						<input align="right" type="submit" value="검색">
+        						</form>
+								
+							</article>
+							
+							
+							<!-- F3_3_2 -->
+							<article id="F3_3_2">
+								<h2 class="major">연도별 매출액 확인</h2>
+								2017->17입력, &nbsp;&nbsp;&nbsp;&nbsp;2018->18입력,&nbsp;&nbsp;&nbsp;&nbsp; 2019->19입력 
+								 <form method="post" action="func3_3_2.jsp">
+           						 	<input type="text" name="year">
+            						<input align="right" type="submit" value="검색">
+        						</form>
+								
+							</article>
+							
+							
+							<!-- F3_3_3 -->
+							<article id="F3_3_3">
+								<h2 class="major">제조사 매출액 확인</h2>
+								무슨 제조사의 의 매출액을 확인 하시겠습니까? *대소문자 구분 필수
+								 <form method="post" action="func3_3_3.jsp">
+           						 	<input type="text" name="make">
+            						<input align="right" type="submit" value="검색">
+        						</form>
+								
+							</article>
 							
 						
 						
@@ -378,8 +772,48 @@
 									{
 									document.write('먼저 매니저로 로그인 하세요');
 									}
+								else
+									{
+									document.write('<nav>');
+									document.write('<ul>');
+									document.write('<li><a href="#F4_1_1">새로운 차량 등록</a></li>');
+									document.write('</ul>');
+									document.write('</nav>');
+									}
 								</script>
-								테스트
+							</article>
+							
+							<!-- F4_1_1 -->
+							<article id="F4_1_1">
+								<h2 class="major">새로운 차량 매물로 등록</h2>
+								
+								 <form method="post" action="func4_1.jsp">
+								 가격
+           						 	<input type="text" name="price">
+           						 	주행거리
+           						 	<input type="text" name="mileage">
+           						 	연식(yyyy-mm-dd)
+           						 	<input type="text" name="model_year">
+           						 	차종
+           						 	<input type="text" name="category_name">
+           						 	변속기
+           						 	<input type="text" name="transmission_name">
+           						 	배기량
+           						 	<input type="text" name="engine_displacement_name">
+           						 	제조사
+           						 	<input type="text" name="make_name">
+           						 	제조사 위치(domestic/imported)
+           						 	<input type="text" name="make_location">
+           						 	모델명
+           						 	<input type="text" name="model_name">
+           						 	세부모델명
+           						 	<input type="text" name="detailed_model_name">
+           						 	색상(투톤컬러면 '+' 기호로 구분) ex) red+blue
+           						 	<input type="text" name="total_color">
+           						 	연료(하이브리드면 '+' 기호로 구분) ex) disel+gasoline
+           						 	<input type="text" name="total_fuel">
+            						<input align="right" type="submit" value="차량 등록">
+            					</form>
 							</article>
 							
 							<!-- F4_2 -->
@@ -392,8 +826,183 @@
 									{
 									document.write('먼저 매니저로 로그인 하세요');
 									}
+								else
+									{
+									document.write('<nav>');
+									document.write('<ul>');
+									document.write('<li><a href="#F4_2_1">등록된 차량 정보 수정</a></li>');
+									document.write('</ul>');
+									document.write('</nav>');
+									}
 								</script>
-								테스트
+							</article>
+							
+							
+							<!-- F4_2_1 -->
+							<article id="F4_2_1">
+								<h2 class="major">등록된 차량 정보 수정</h2>
+											
+								<nav>
+									<ul>
+										<li><a href="#F4_2_1_1">등록됭 차량의  가격 수정</a></li>
+										<li><a href="#F4_2_1_2">등록됭 차량의  주행거리 수정</a></li>
+										<li><a href="#F4_2_1_3">등록됭 차량의  연식 수정</a></li>
+										<li><a href="#F4_2_1_4">등록됭 차량의  차종 수정</a></li>
+										<li><a href="#F4_2_1_5">등록됭 차량의  변속기 수정</a></li>
+										<li><a href="#F4_2_1_6">등록됭 차량의  배가량 수정</a></li>
+										<li><a href="#F4_2_1_7">등록됭 차량의  회사 수정</a></li>
+										<li><a href="#F4_2_1_8">등록됭 차량의  모델 수정</a></li>
+										<li><a href="#F4_2_1_9">등록됭 차량의  세부모델 수정</a></li>
+										<li><a href="#F4_2_1_10">등록됭 차량의  색상 수정</a></li>
+										<li><a href="#F4_2_1_11">등록됭 차량의  연료 수정</a></li>
+									</ul>
+								</nav>
+								
+							</article>
+							
+							<!-- F4_2_1_1 -->
+							<article id="F4_2_1_1">
+								<h2 class="major">등록된 차량의 가격 수정</h2>
+								 <form method="post" action="func4_2_1_1.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	가격
+           						 	<input type="text" name="price">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_2 -->
+							<article id="F4_2_1_2">
+								<h2 class="major">등록된 차량의 주행거리 수정</h2>
+								 <form method="post" action="func4_2_1_2.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	주행거리
+           						 	<input type="text" name="mileage">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_3 -->
+							<article id="F4_2_1_3">
+								<h2 class="major">등록된 차량의 가격 수정</h2>
+								 <form method="post" action="func4_2_1_3.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	연식(yyyy-mm-dd)
+           						 	<input type="text" name="model_year">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_4 -->
+							<article id="F4_2_1_4">
+								<h2 class="major">등록된 차량의 차종 수정</h2>
+								 <form method="post" action="func4_2_1_4.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	차종
+           						 	<input type="text" name="category_name">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_5 -->
+							<article id="F4_2_1_5">
+								<h2 class="major">등록된 차량의 변속기 수정</h2>
+								 <form method="post" action="func4_2_1_5.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	변속기
+           						 	<input type="text" name="transmission_name">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_6 -->
+							<article id="F4_2_1_6">
+								<h2 class="major">등록된 차량의 배기량  수정</h2>
+								 <form method="post" action="func4_2_1_6.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	배기량
+           						 	<input type="text" name="engine_displacement_name">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_7 -->
+							<article id="F4_2_1_7">
+								<h2 class="major">등록된 차량의 제조사 수정</h2>
+								 <form method="post" action="func4_2_1_7.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	제조사
+           						 	<input type="text" name="make">
+           						 	제조사 위치 (domestic/imported)
+           						 	<input type="text" name="make_location">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_8 -->
+							<article id="F4_2_1_8">
+								<h2 class="major">등록된 차량의 모델 수정</h2>
+								 <form method="post" action="func4_2_1_8.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	모델
+           						 	<input type="text" name="model">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_9 -->
+							<article id="F4_2_1_9">
+								<h2 class="major">등록된 차량의 세부모델 수정</h2>
+								 <form method="post" action="func4_2_1_9.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	세부모델
+           						 	<input type="text" name="detailed_model_name">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_10 -->
+							<article id="F4_2_1_10">
+								<h2 class="major">등록된 차량의 색상 수정</h2>
+								 <form method="post" action="func4_2_1_10.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	색상 (투톤컬러면 +로 구분)
+           						 	<input type="text" name="total_color">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
+							</article>
+							
+							<!-- F4_2_1_11 -->
+							<article id="F4_2_1_11">
+								<h2 class="major">등록된 차량의 연료 수정</h2>
+								 <form method="post" action="func4_2_1_11.jsp">
+									 차량 번호
+           						 	<input type="text" name="vehicle_number">
+           						 	연료 (하이브리드면 +로 구분)
+           						 	<input type="text" name="total_fuel">
+           						 	<br>
+            						<input align="right" type="submit" value="수정">
+            						</form>
 							</article>
 							
 							<!-- F4_3 -->
@@ -406,8 +1015,39 @@
 									{
 									document.write('먼저 매니저로 로그인 하세요');
 									}
+								else
+									{
+									document.write('<nav>');
+									document.write('<ul>');
+									document.write('<li><a href="#F4_3_1">차량 공개 설정</a></li>');
+									document.write('<li><a href="#F4_3_2">차량 비공개 설정</a></li>');
+									document.write('</ul>');
+									document.write('</nav>');
+	            						
+									}
 								</script>
-								테스트
+							</article>
+							
+							<!-- F4_3_1 -->
+							<article id="F4_3_1">
+								<h2 class="major">차량 공개 설정</h2>
+								어떤 차량을 공개 설정하겠 습니까?
+								 <form method="post" action="func4_3_1.jsp">
+           						 	<input type="text" name="vehicle_number">
+            						<input align="right" type="submit" value="차량 공개">
+        						</form>
+								
+							</article>
+							
+							<!-- F4_3_2 -->
+							<article id="F4_3_2">
+								<h2 class="major">차량 비공개 설정</h2>
+								어떤 차량을 비공개 설정하겠 습니까?
+								 <form method="post" action="func4_3_2.jsp">
+           						 	<input type="text" name="vehicle_number">
+            						<input align="right" type="submit" value="차량 비공개">
+        						</form>
+								
 							</article>
 						
 							
