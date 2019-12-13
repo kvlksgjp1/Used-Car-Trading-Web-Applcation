@@ -20,7 +20,7 @@
 	conn = DriverManager.getConnection(url, user, pass);
 	stmt = conn.createStatement();
 	
-	String query = "SELECT Authorization "+
+	String query = "SELECT * "+
 			"FROM ACCOUNT "+
 			"WHERE Account_ID='"+request.getParameter("id")+"' AND Password='"+request.getParameter("pw")+"'";
 
@@ -39,7 +39,7 @@
 	
 	if (!result.equals("none"))
 	{
-		String redirectUrl = "index.html?"+"login_status=success&login_id="+request.getParameter("id")+"&authorization="+result; // 인증 성공
+		String redirectUrl = "index.html?"+"login_status=success&login_id="+request.getParameter("id"); // 인증 성공
 
 		//out.print("localStorage.setItem('name', 'zerocho');");
 		//session.setAttribute("phase4_login_status", "success");

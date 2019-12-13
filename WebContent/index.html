@@ -15,9 +15,15 @@
 	<body class="is-preload">
 
 							<script>
-
-						    localStorage.setItem('login_status', 'failed');
-						    localStorage.setItem('login_id', 'null');
+							function getParameterByName(name) {
+							    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+							    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+							        results = regex.exec(location.search);
+							    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+							}
+	//					    localStorage.setItem('login_status', 'failed');
+	//					    localStorage.setItem('login_id', 'null');
+	
 							</script>
 							
 		<!-- Wrapper -->
@@ -36,12 +42,8 @@
 								Web DataBase Application Project<br>HIGHLY INTERACTIVE WEB PAGE</p>
 								
 							<script>
-							function getParameterByName(name) {
-							    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-							    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-							        results = regex.exec(location.search);
-							    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-							}
+							//document.write(localStorage.getItem("login_status"));
+							
 							
 							    var login_status = getParameterByName('login_status');
 							    //document.write(login_status);
@@ -49,27 +51,49 @@
 							    {
 								    var login_id = getParameterByName('login_id');
 								    //document.write(login_id);
-								    localStorage.setItem('login_status', 'success');
-								    localStorage.setItem('login_id', login_id);
+								    sessionStorage.setItem('login_status', 'success');
+								    sessionStorage.setItem('login_id', login_id);
+
+								    var authorization = getParameterByName('authorization');
+								    sessionStorage.setItem('authorization', authorization);
 								    
-								    document.write(login_id+"님 환영합니다"); 
+								    
+								    
 							    }
 							    else if(login_status == "failed")
 							    {
 								    //document.write(login_id);
-								    localStorage.setItem('login_status', 'failed');
-								    
+								    sessionStorage.setItem('login_status', 'failed');
+								    sessionStorage.setItem('login_id', 'none');
+								    sessionStorage.setItem('authorization', 'none');
+
+								    document.write("로그인에 실패하였습니다");
 							    }
+							    
+							    var islogout = getParameterByName('logout');
+							    if(islogout=="true")
+							    	{
+									    sessionStorage.setItem('login_status', 'logout');
+									    sessionStorage.setItem('login_id', 'none');
+									    sessionStorage.setItem('authorization', 'none');
+								    	document.write("로그아웃 되었습니다");
+							    	}
+							    
+							    if(sessionStorage.getItem("login_status") == "success")
+							    	{
+							    	var login_id2=sessionStorage.getItem("login_id")
+							    	document.write(login_id2+"님 환영합니다"); 
+							    	}
 							</script>
 							
 							</div>
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">Login</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
+								<li><a href="#F1">회원</a></li>
+								<li><a href="#F2">차량</a></li>
+								<li><a href="#F3">거래</a></li>
+								<li><a href="#F4">관리자</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -78,63 +102,316 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">LOGIN</h2>
-								 <form action="authentication.jsp" method="post">
-            <label>ID: </label>
-            <input name="id" type="text"><br>
-            <label>PW: </label>
-            <input name="pw" type="password"><br>
-            <input type="submit" value="로그인">
-        </form>
+						<!-- F1 -->
+							<article id="F1">
+								<h2 class="major">회원 관련 기능</h2>
+								
+						<nav>
+							<ul>
+								<li><a href="#F1_1">회원가입</a></li>
+								<li><a href="#F1_2">회원 정보 수정</a></li>
+								<li><a href="#F1_3">비밀 번호 수정</a></li>
+								<li><a href="#F1_4">로그인</a></li>
+								<li><a href="#F1_5">회원 탈퇴 기능</a></li>
+								<li><a href="#F1_6">로그아웃</a></li>
+							</ul>
+						</nav>
+						
+						
 
           </article>
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-워크
+						<!-- F2 -->
+							<article id="F2">
+								<h2 class="major">차량 관련 기능</h2>
+								
+							
+						<nav>
+							<ul>
+								<li><a href="#F2_1">차량 매물 전체검색</a></li>
+								<li><a href="#F2_2">제조사별 차량 검색</a></li>
+								<li><a href="#F2_3">특정 조건으로 차량 검색</a></li>
+								<li><a href="#F2_4">이름으로 검색</a></li>
+							</ul>
+						</nav>
+						
+							</article>
+							
+							
+
+						<!-- F3 -->
+							<article id="F3">
+								<h2 class="major">거래 관련 기능</h2>
+							
+						<nav>
+							<ul>
+								<li><a href="#F3_1">자신의 거래 내역 확인 (회원)</a></li>
+								<li><a href="#F3_2">모든 차량 거래 내역 확인 (매니저)</a></li>
+								<li><a href="#F3_3">월별, 연도별, 제조사별 매출액 확인 (매니저)</a></li>
+							</ul>
+						</nav>
+						
 							</article>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+						<!-- F4 -->
+							<article id="F4">
+								<h2 class="major">관리자 관련 기능</h2>
+								
+						<nav>
+							<ul>
+								<li><a href="#F4_1">새로운 차량 매물로 등록 (매니저)</a></li>
+								<li><a href="#F4_2">등록된 차량 정보 수정 (매니저)</a></li>
+								<li><a href="#F4_3">등록된 차량 공개/비공개 처리 (매니저)</a></li>
+							</ul>
+						</nav>
+						
+						
 							</article>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
 
+						<!-- test -->
+							<article id="test">
+								<h2 class="major">test</h2>
+								테스트
+							</article>
+							
+							<!-- F1_1 -->
+							<article id="F1_1">
+								<h2 class="major">회원가입</h2>
+								
+								테스트
+							</article>
+							
+							<!-- F1_2 -->
+							<article id="F1_2">
+								<h2 class="major">회원 정보 수정</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+							</article>
+							
+							<!-- F1_3 -->
+							<article id="F1_3">
+								<h2 class="major">비밀 번호 수정</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+							</article>
+							
+						<!-- F1_4 -->
+							<article id="F1_4">
+								<h2 class="major">로그인</h2>
+								
+								 <form action="authentication.jsp" method="post">
+					            <label>ID: </label>
+					            <input name="id" type="text"><br>
+					            <label>PW: </label>
+					            <input name="pw" type="password"><br>
+					            <input type="submit" value="로그인">
+					        </form>
+							</article>
+							
+					
+					
+							<!-- F1_5 -->
+							<article id="F1_5">
+								<h2 class="major">회원 탈퇴 기능</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+							</article>
+							
+							
+							<!-- F1_6 -->
+							<article id="F1_6">
+								<h2 class="major">로그아웃</h2>
+								
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+								 <form action="index.html?logout=true" method="post">
+					            <input type="submit" value="로그아웃">
+					        	</form>
+							</article>
+							
+							-
+							<!-- F2_1 -->
+							<article id="F2_1">
+								<h2 class="major">차량 매물 전체검색</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+							</article>
+							
+							
+							<!-- F2_2 -->
+							<article id="F2_2">
+								<h2 class="major">제조사별 차량 검색</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+								테스트
+							</article>
+							
+							
+							<!-- F2_3 -->
+							<article id="F2_3">
+								<h2 class="major">특정 조건으로 차량 검색</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								
+								테스트
+							</article>
+							
+							
+							<!-- F2_4 -->
+							<article id="F2_4">
+								<h2 class="major">이름으로 검색</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('login_status');
+								if(!(is_login=="success"))
+									{
+									document.write('먼저 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							
+							
+							<!-- F3_1 -->
+							<article id="F3_1">
+								<h2 class="major">자신의 거래 내역 확인</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="normal"))
+									{
+									document.write('먼저 회원으로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							
+							<!-- F3_2 -->
+							<article id="F3_2">
+								<h2 class="major">모든 차량 거래 내역 확인</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="manager"))
+									{
+									document.write('먼저 매니저로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							
+							<!-- F3_3 -->
+							<article id="F3_3">
+								<h2 class="major">월별, 연도별, 제조사별 매출액 확인</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="manager"))
+									{
+									document.write('먼저 매니저로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							
+						
+						
+						<!-- F4_1 -->
+							<article id="F4_1">
+								<h2 class="major">새로운 차량 매물로 등록</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="manager"))
+									{
+									document.write('먼저 매니저로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							<!-- F4_2 -->
+							<article id="F4_2">
+								<h2 class="major">등록된 차량 정보 수정</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="manager"))
+									{
+									document.write('먼저 매니저로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+							
+							<!-- F4_3 -->
+							<article id="F4_3">
+								<h2 class="major">등록된 차량 공개/비공개 처리</h2>
+								
+								<script>
+								var is_login = sessionStorage.getItem('authorization');
+								if(!(is_login=="manager"))
+									{
+									document.write('먼저 매니저로 로그인 하세요');
+									}
+								</script>
+								테스트
+							</article>
+						
+							
+							
 						<!-- Elements -->
 							<article id="elements">
 								<h2 class="major">Elements</h2>
