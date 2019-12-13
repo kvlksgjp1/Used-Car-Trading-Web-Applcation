@@ -32,11 +32,10 @@
 	ResultSet rs;
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url,user,pass);
-	String sql;
-	sql="select vehicle_id,vehicle_did,price,mileage,price,model_year\r\n" + 
-			"from vehicle natural join\r\n" + 
-			"(select vehicle_id from vehicle minus select distinct order_vid as vehicle_id from order_) where is_opened = 1";
+	String make_name = request.getParameter("make_name"); 
+	String sql = "select vehicle_id,vehicle_did,price,mileage,price,model_year from vehicle v,make m where v.is_opened = 1 and v.vehicle_makeid = make_id and make_name = "+"'"+make_name+"'";
 	System.out.println(sql);
+	
 	pstmt = conn.prepareStatement(sql);
 	rs = pstmt.executeQuery();
 	
@@ -45,8 +44,6 @@
 	int cnt = rsmd.getColumnCount();
 	for(int i =1;i<=cnt;i++){
 		out.println("<th>"+rsmd.getColumnName(i)+"</th>");
-		
-		
 	}
 	while(rs.next()){
 		out.println("<tr>");
