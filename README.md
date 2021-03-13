@@ -4,9 +4,11 @@ Used Car Trading Web Applcation
 ![image](https://user-images.githubusercontent.com/47056984/111028415-d535b080-8439-11eb-8436-4fe5983b8a8a.png)
 
 ![image](https://user-images.githubusercontent.com/47056984/111028563-c4d20580-843a-11eb-94c4-91143c5cf14c.png)
+
 ER 다이아그램 부터 설계를 하였다. 실제 SK엔카 사이트를 벤치마킹하여 사이트에 있는 모델, 세부모델, 제조사등 실제 있는 정보를 엔티티 정보로 만들고 관계를 정의하였다.
 
 ![image](https://user-images.githubusercontent.com/47056984/111028569-ce5b6d80-843a-11eb-957a-7c9c0e23602e.png)
+
 ER로 표현한 것을 Relation으로 표기하였다.
 
 개요
@@ -20,10 +22,11 @@ ER로 표현한 것을 Relation으로 표기하였다.
 4. 관리자 기능(새로운 차량 등록, 등록된 정보 수정 등)
 
 트랜잭션
+
 차량 구매 시, 동시성 제어가 필요하다. Select문과 insert문을 하나의 트랜잭션으로 만들어서 원자성을
 지켰고, 한 차량 구매 시, 한 명의 사용자만 접근하도록 구성하여서 격리성을 지켰다.
 
-#추천 시스템
+추천 시스템
 성별과 연령에 따라서 추천서비스를 제공한다.
 
 
